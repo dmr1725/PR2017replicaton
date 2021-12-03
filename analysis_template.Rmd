@@ -28,14 +28,32 @@ You may find it helpful to use the version control and code sharing system calle
 ### Exploratory analysis of pharmacogenomic data
 
 1. How many cell-lines are contained in the data?
+```{r}
+rawFile <- "rawPharmacoData.csv"
+pharmacoData <- read.csv(rawFile)
+
+length(levels(pharmacoData$cellLine)) #0
+```
 
 2. What drug concentrations were used in each study?
+
+```{r}
+unique(pharmacoData$concentration)
+```
 
 3. Histograms, appart from telling how is the data
 distributed, can also make evident potential
 problems with the data. Plot a histogram
 of drug viabilities. Does it look as one would
 expect from the description of the data?
+
+```{r quest6, warning=FALSE}
+library(ggplot2)
+library(cowplot)
+ggplot( pharmacoData, aes( log2(viability) ) ) +
+    geom_histogram(fill = "white", colour="black") +
+    facet_wrap(~study)
+```
 
 4. How many viability data points are within the
 expected range according to the definition of viability (e.g. above 0 
@@ -45,6 +63,11 @@ issues? Biology?
 
 5. Read the csv file containing the summarized data files. What kind
 of variables are in the data? What does each column represents?
+```{r}
+summarizedData <- "summarizedPharmacoData.csv"
+summarizePharmaco <- read.csv(summarizedData)
+str(summarizePharmaco)
+```
 
 6. Plot a histogram of the viability scores as a function of the drug
 doses. Are stronger drug concentrations consistent with lower viability scores?
