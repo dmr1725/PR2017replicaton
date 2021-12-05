@@ -32,7 +32,7 @@ You may find it helpful to use the version control and code sharing system calle
 rawFile <- "rawPharmacoData.csv"
 pharmacoData <- read.csv(rawFile)
 
-length(levels(pharmacoData$cellLine)) #0
+length((pharmacoData$cellLine)) 
 ```
 
 2. What drug concentrations were used in each study?
@@ -61,6 +61,10 @@ and below 100)? Try to come up with explanations about
 the values that are out of range. Are these due to technical
 issues? Biology?
 
+```{r}
+sum(pharmacoData["viability"] < 100)
+```
+
 5. Read the csv file containing the summarized data files. What kind
 of variables are in the data? What does each column represents?
 ```{r}
@@ -71,10 +75,20 @@ str(summarizePharmaco)
 
 6. Plot a histogram of the viability scores as a function of the drug
 doses. Are stronger drug concentrations consistent with lower viability scores?
+```{r}
+ggplot(pharmacoData, aes(viability, group=study)) + geom_histogram(fill="white", colour="black")
+```
 
 ### Using Correlation Measures to Assess Replicability of Drug Response Studies
 
 1. Create a scatterplot for each drug comparing the AUC in GDSC and CCLE for all cell lines (hint: code from Tutorial 2 may help).
+```{r AUC 1 drug}
+library(ggplot2)
+ggplot(aes(x=auc_GDSC, y=auc_CCLE), data=subset(cellLinesSummary, drug=="AZD0530")) +
+    geom_point() +
+    xlab("GDSC AUC") +
+    ylab("CCLE AUC") 
+```
 
 2. Calculate correlation coefficients of the AUC in GDSC and CCLE for each drug (hint: code from Tutorial 2 may help). 
 
