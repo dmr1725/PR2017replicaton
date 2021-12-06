@@ -1,5 +1,5 @@
 ---
-title: "Insert your team name here"
+title: "DYPE"
 output: html_document
 date: Replicathon 2017
 author: Team members names
