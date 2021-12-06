@@ -1,8 +1,8 @@
 ---
 title: "DYPE"
 output: html_document
-date: Replicathon 2017
-author: Team members names
+date: December 6, 2021
+author: Diego Mendez Rosa, Yared Osorio, Paola Acevedo & Elizabeth Nolasco.
 ---
 
 ```{r setup, include=FALSE}
